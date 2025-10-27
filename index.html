@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Умный список покупок</title>
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛒 Умный список покупок</h1>
+            <p>Сравнение цен, аналитика корзины и история покупок</p>
+        </header>
+
+        <div class="navigation">
+            <button class="nav-btn active" data-page="shopping-list">
+                <i>📋</i> Список покупок
+            </button>
+            <button class="nav-btn" data-page="price-comparison">
+                <i>🏪</i> Сравнение цен
+            </button>
+            <button class="nav-btn" data-page="analytics">
+                <i>📊</i> Аналитика
+            </button>
+        </div>
+
+        <div id="shopping-list" class="page active">
+            <div class="lists-header">
+                <h2>Мои списки покупок</h2>
+                <button id="create-new-list" class="btn-success"><i>➕</i> Новый список</button>
+            </div>
+
+            <div class="lists-container" id="lists-container">
+            </div>
+            
+            <div class="main-content">
+                <div class="left-column">
+                    <div class="card">
+                        <h2><i>➕</i> Добавить товар</h2>
+                        <div class="form-group">
+                            <label for="product-name">Название товара</label>
+                            <input type="text" id="product-name" placeholder="Например: Молоко">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-category">Категория</label>
+                            <select id="product-category">
+                                <option value="Продукты">Продукты</option>
+                                <option value="Бытовая химия">Бытовая химия</option>
+                                <option value="Косметика">Косметика</option>
+                                <option value="Техника">Техника</option>
+                                <option value="Другое">Другое</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="product-quantity">Количество</label>
+                            <input type="number" id="product-quantity" value="1" min="1" class="quantity-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="product-priority">Приоритет</label>
+                            <select id="product-priority">
+                                <option value="low">Низкий</option>
+                                <option value="medium">Средний</option>
+                                <option value="high">Высокий</option>
+                            </select>
+                        </div>
+                        <button id="add-product"><i>➕</i> Добавить товар</button>
+                        
+                        <div class="quick-actions">
+                            <button class="btn-secondary btn-small" id="clear-list"><i>🗑️</i> Очистить список</button>
+                        </div>
+
+                        <div class="stores-management">
+                            <h3>Управление магазинами</h3>
+                            <div class="form-group">
+                                <input type="text" id="new-store" placeholder="Название нового магазина">
+                                <button id="add-store" class="btn-small">Добавить магазин</button>
+                            </div>
+                            <div id="stores-list">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="right-column">
+                    <div class="card">
+                        <div class="search-sort">
+                            <input type="text" id="search-products" placeholder="Поиск товаров...">
+                        </div>
+
+                        <div class="filter-buttons" id="store-filters">
+                        </div>
+                        
+                        <h2><i>📋</i> Список покупок</h2>
+                        <div id="products-list">
+                            <div class="empty-state">
+                                <i>🛒</i>
+                                <p>Ваш список покупок пуст</p>
+                                <p>Добавьте товары, чтобы начать сравнение цен</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="price-comparison" class="page">
+            <div class="card">
+                <h2><i>🏪</i> Сравнение цен по магазинам</h2>
+                <div id="comparison-table">
+                    <div class="empty-state">
+                        <i>🏪</i>
+                        <p>Добавьте товары, чтобы сравнить цены</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="analytics" class="page">
+            <div class="card">
+                <div class="tabs">
+                    <div class="tab active" data-tab="analytics">Аналитика</div>
+                    <div class="tab" data-tab="history">История цен</div>
+                    <div class="tab" data-tab="economy">Экономия</div>
+                </div>
+                
+                <div class="tab-content active" id="analytics-tab">
+                    <h2><i>📊</i> Аналитика корзины</h2>
+                    <div id="analytics-container">
+                        <div class="empty-state">
+                            <i>📊</i>
+                            <p>Добавьте товары и цены, чтобы увидеть аналитику</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="history-tab">
+                    <h2><i>📈</i> История цен</h2>
+                    <div id="history-container">
+                        <div class="empty-state">
+                            <i>📈</i>
+                            <p>Добавьте товары с историей цен, чтобы увидеть изменения</p>
+                            <p>Обновите цены несколько раз для одного товара</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="economy-tab">
+                    <h2><i>💰</i> Статистика экономии</h2>
+                    <div id="economy-container">
+                        <div class="empty-state">
+                            <i>💰</i>
+                            <p>Добавьте товары с ценами, чтобы увидеть статистику экономии</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="price-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-product-name">Цены для товара</h3>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div id="modal-body">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancel-modal">Отмена</button>
+                <button class="btn-success" id="save-prices">Сохранить цены</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="list-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Создать новый список</h3>
+                <button class="close-btn" id="close-list-modal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="new-list-name">Название списка</label>
+                <input type="text" id="new-list-name" placeholder="Например: Еженедельные покупки">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancel-list-modal">Отмена</button>
+                <button class="btn-success" id="save-list">Создать список</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
